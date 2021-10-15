@@ -2,7 +2,6 @@ let input_city = document.querySelector('.input_city');
 let send_city = document.querySelector('.send_city');
 let results = document.querySelector('.results');
 let messages = document.querySelector('.messages');
-let command = document.querySelector('.commands');
 let start = document.querySelector('.start');
 let finish = document.querySelector('.finish');
 let microphone = document.querySelector('.microphone');
@@ -12,7 +11,6 @@ let voices = [];
 
 let city, usedCities, firstLetter, game;
 let step = 0;
-let commands = ['новая игра', 'сдаться'];
 let allCities = {
   'а': ['Абакан', 'Азов', 'Александров', 'Алексин', 'Альметьевск', 'Алушта', 'Анапа', 'Ангарск', 'Арзамас', 'Армавир', 'Артем', 'Архангельск', 'Астрахань', 'Асбест', 'Ачинск'],
   'б': ['Барнаул', 'Бийск', 'Благовещенск', 'Братск', 'Брянск'],
@@ -44,8 +42,9 @@ let allCities = {
   'я': ['Якутск', 'Ялта', 'Ярославль']
 };
 
- let synth = window.speechSynthesis;
- populateVoiceList();
+let synth = window.speechSynthesis;
+
+populateVoiceList();
   if (speechSynthesis.onvoiceschanged !== undefined) {
   speechSynthesis.onvoiceschanged = populateVoiceList;
 }
@@ -54,13 +53,13 @@ let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogniti
 let SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarList;
 let SpeechRecognitionEvent = window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
 
-let commandsList = Object.values(commands);
+let citiesList = [];
 for (let key in allCities) {
   for (let city of allCities[key]) {
-    commandsList.push(city);
+    citiesList.push(city);
   }
 }
-let grammar = '#JSGF V1.0; grammar commands; public <command> = ' + commandsList.join(' | ') + ' ;';
+let grammar = '#JSGF V1.0; grammar cities; public <city> = ' + citiesList.join(' | ') + ' ;';
 
 let recognition = new SpeechRecognition();
 let speechRecognitionList = new SpeechGrammarList();
@@ -68,42 +67,28 @@ speechRecognitionList.addFromString(grammar, 1);
 
 recognition.grammars = speechRecognitionList;
 recognition.lang = 'ru-RU';
-recognition.continuous = true;
-recognition.interimResults = true;
+recognition.interimResults = false;
 
-
-recognition.onend = function() {
-  if (microphone.classList.contains('on')) {
-    recognition.start();
-  }
+recognition.onstart = function() {
+  microphone_icon.alt = 'microphone_turnoff';  
+  microphone_icon.src = 'img/microphone_off.png';
 };
 
-recognition.start(); 
+recognition.onend = function() {
+  microphone_icon.src = 'img/microphone_on.png';
+  microphone_icon.alt = 'microphone_turnon';
+};
+
 startGame();
 
 microphone.addEventListener('click', function() {
-  if (this.classList.contains('on')) {
-    recognition.stop();
-    microphone_icon.src = 'img/microphone_on.png';
-    microphone_icon.alt = 'microphone_turnon';
-  } else {  
-    recognition.start();
-    microphone_icon.alt = 'microphone_turnoff';  
-    microphone_icon.src = 'img/microphone_off.png';
-  }
-  this.classList.toggle('on');
+  recognition.start();
 });
 
 recognition.onresult = function(event) {
   let last = event.results.length - 1;
   let message = getObjects(event.results[last][0].transcript);
-  if (isInObj(message, commands)) {
-    if (message == 'новая игра' && game == 'off') {
-      startGame();
-    } else if (message == 'сдаться' && game == 'on' && step % 2 == 0) {
-      stopGame();
-    }
-  } else if (isInObj(message, allCities) && game == 'on' && step % 2 == 0) {
+  if (game == 'on' && step % 2 == 0) {
     input_city.value = message;
     playerStep();
   }
@@ -133,7 +118,7 @@ function playerStep() {
   if (!isInObj(city, usedCities) && (firstLetter == '' || isInObj(city, allCities[firstLetter]))) {
     finishStep();
   } else if (firstLetter !== undefined && !isInObj(city, allCities[firstLetter])) {
-    messages.innerHTML = 'Вы должны назвать город на букву ' + firstLetter.toUpperCase() + '. Игрок ходит.';
+    messages.innerHTML = 'Вы должны назвать город на букву ' + '"' + firstLetter.toUpperCase() + '"' + '. Игрок ходит.';
     speak();
   } else if (isInObj(city, usedCities)) {
     messages.innerHTML = 'Такой город уже был. Игрок ходит.';
@@ -189,16 +174,18 @@ function finishStep() {
   usedCities.push (city);
   speak();
   if (step % 2 != 0) {
-    computerStep();
+    setTimeout(function() {
+      computerStep();
+    }, 500);
   } else {
     finish.classList.add('active');
   }
 }
 
 function getObjects(speechResult) {
-  for (let i = 0; i < commandsList.length; i++) {
-    if (speechResult.indexOf(commandsList[i]) !== -1) {
-      let object = commandsList[i];
+  for (let i = 0; i < citiesList.length; i++) {
+    if (speechResult.indexOf(citiesList[i]) !== -1) {
+      let object = citiesList[i];
       return object;
     }
   }
