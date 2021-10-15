@@ -1,0 +1,19 @@
+.results {
+  width: 400px;
+  height: 50px;
+  border: 1px solid black;
+}
+.messages {
+  width: 400px;
+  height: 50px;
+  border: 1px solid black;
+}
+.commands {
+  width: 400px;
+  height: 50px;
+  border: 1px solid black;
+}
+.start:not(.active),
+.finish:not(.active) {
+  display: none;
+}
