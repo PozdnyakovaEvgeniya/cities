@@ -1,19 +1,312 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: comic sans ms;
+  font-weight: bold;
+  font-size: calc(13px + 0.8vmin);
+}
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+button {
+  cursor: pointer;
+  background: #d3d300;
+  border: none;
+  padding: 1vh 1vw;
+}
+body {
+  margin: 0;
+}
+.wrapper {
+  display: grid;
+  grid-template-areas:
+    "header"
+    "article"
+    "footer";
+  grid-template-rows: 15vh 1fr 5vh;
+  height: 100vh;
+  width: 100vw;
+}
+.header {
+  grid-area: header;
+  min-height: 85px;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3vw;
+  background: #80c944;
+  box-shadow: 0 1vh 1.5vh #5c5c5c;
+  z-index: 99;
+}
+.sound {
+  background: none;
+  border: none;
+}
+.container {
+  grid-area: article;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  background: url(img/city.jpg) no-repeat center;
+  background-size: auto 100%;
+}
+.start {
+  width: 35vw;
+  min-width: 400px;
+  height: 40vh;
+  min-height: 400px;
+  background: #feffed;
+  border: 5px solid #80c944;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  box-shadow: 15px 15px 10px #5c5c5c;
+  padding: 1vw;
+}
+input.input_name {
+  width: 100%;
+  border: 3px solid #d3d300;
+  padding: 0 1vw;
+}
+div.avatars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+}
+div.avatars > label {
+  display: grid;
+  grid-template-rows: 5fr 1fr;
+  justify-items: center;
+  align-items: center;
+}
+div.avatars > label > img {
+  width: 100%;
+  height: auto;
+}
+.new_game {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  justify-self: center;
+}
+.main_content {
+  min-width: 500px;
+  min-height: 400px;
+  width: 45vw;
+  height: 55vh;
+  display: grid;
+  grid-template-columns: 40% 58%;
+  grid-template-rows: 50% 17% 10%;
+  justify-items: center;
+  align-content: space-between;
+  justify-content: space-between;
+  margin: 0 2vw;
+}
+.messages,
 .results {
-  width: 400px;
-  height: 50px;
-  border: 1px solid black;
+  background: #feffed;
+  box-shadow: 0.6vw 1vh 0.4vh #d3d300;
+  width: 100%;
+  padding: 0 1vw;
+  border: 1px solid #d3d300;
+  display: grid;
+  align-content: center;
 }
-.messages {
-  width: 400px;
-  height: 50px;
-  border: 1px solid black;
+.input_cities_group {
+  grid-column: 1/3;
+  display: grid;
+  grid-template-columns: 73% 25%;
+  justify-content: space-between;
+  width: 100%;
 }
-.commands {
-  width: 400px;
-  height: 50px;
-  border: 1px solid black;
+.input_cities {
+  background: #feffed;
+  border: 3px solid #d3d300;
+  display: grid;
+  grid-template-columns: 6fr 1fr;
+  padding: 0 0.5vw;
 }
-.start:not(.active),
-.finish:not(.active) {
+.input_cities input {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  padding: 0 0.5vw;
+  background: #feffed;
+  border: none;
+  width: 100%;
+}
+.input_cities input::placeholder {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 100;
+  color: #b8b8b8;
+}
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.microphone,
+.send_city {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: #feffed;
+  padding: 0;
+}
+.is_end {
+  min-width: 500px;
+  min-height: 400px;
+  width: 30vw;
+  height: 40vh;
+  background: #feffed;
+  border: 5px solid #80c944;
+  display: grid;
+  grid-template-rows: 3fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  box-shadow: 1.5vmin 1.5vmin 1vmin #5c5c5c;
+}
+.is_end > p {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  text-align: center;
+  font-size: calc(28px + 0.8vmin);
+  line-height: 2;
+}
+.is_end > button {
+  width: 70%;
+}
+.end {
+  width: 30vw;
+  min-width: 500px;
+  height: 70vh;
+  min-height: 400px;
+  background: #feffed;
+  border: 5px solid #80c944;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  box-shadow: 15px 15px 10px #5c5c5c;
+  text-align: center;
+}
+.final_results {
+  font-size: calc(24px + 0.8vmin);
+}
+.end > button {
+  width: 70%;
+}
+.footer {
+  grid-area: footer;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding: 0 3vw;
+}
+.footer > * {
+  align-self: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: calc(10px + 0.4vmin);
+  font-weight: 100;
+  color: #b8b8b8;
+}
+.voices_list {
+  border: 1px solid #b8b8b8;
+  width: 100%;
+}
+.voices_list > * {
+  font-family: "Montserrat", sans-serif;
+  font-size: calc(10px + 0.4vmin);
+  font-weight: 100;
+}
+.passive {
   display: none;
+}
+@import url("https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic");
+
+@media all and (max-width: 500px) {
+  .container {
+    min-height: 0;
+    align-content: stretch;
+  }
+  .start {
+    border: none;
+    width: 100vw;
+    min-width: 0;
+    height: 100%;
+    min-height: 0;
+    grid-template-rows: 1fr 1fr 1fr 3fr 1fr;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    box-shadow: none;
+  }
+  p.input_name {
+    grid-row-start: 1;
+  }
+  input.input_name {
+    grid-row-start: 2;
+    width: 90vw;
+  }
+  p.avatars {
+    grid-row-start: 3;
+  }
+  div.avatars {
+    grid-row-start: 4;
+    width: 98vw;
+  }
+  .main_content {
+    min-width: 0;
+    min-height: 0;
+    width: 90vw;
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 28% 10% 28% 10% 10%;
+    justify-items: center;
+    align-content: space-around;
+  }
+  .city {
+    grid-row-start: 3;
+  }
+  .results {
+    grid-row-start: 4;
+  }
+  .avatar {
+    grid-row-start: 1;
+  }
+  .messages {
+    grid-row-start: 2;
+    margin: 0;
+  }
+  .input_cities_group {
+    grid-row-start: 5;
+    grid-template-columns: 75% 24%;
+  }
+  .input_cities {
+    grid-template-columns: 5fr 2fr;
+  }
+  .buttons {
+    grid-template-columns: 40% 48%;
+    justify-content: space-between;
+  }
+  .is_end {
+    border: none;
+    box-shadow: none;
+    height: 100%;
+    width: 100vw;
+    min-height: 0;
+    min-width: 0;
+    grid-template-rows: 10% 10%;
+    align-content: space-evenly;
+  }
+  .end {
+    border: none;
+    height: 100%;
+    width: 100vw;
+    min-width: 0;
+    min-height: 0;
+    box-shadow: none;
+  }
 }

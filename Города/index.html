@@ -9,14 +9,72 @@
   </head>
   <body>
     <div class="wrapper">
-      <input type="text" class="input_city">
-      <button class="microphone"><img src="img/microphone_on.png" alt="microphone_turnon"></button>
-      <button class="send_city">Отправить</button>
-      <div class="results"></div>
-      <div class="messages"></div>
-      <button class="start">Новая игра</button>
-      <button class="finish active">Сдаться</button>
-      <select class="voices_list"></select>
+      <div class="header">
+        <img class="logo" src="img/logo.png" alt="logo">
+        <button class="sound on"><img src="img/sound_off.png" alt="sound_off"></button>
+      </div>
+      <div class="container">
+        <!-- <div class="content"> -->
+          <div class="start">
+            <!-- <div class="input_name"> -->
+              <p class="input_name">Введите имя:</p>
+              <input class="input_name" type="text" value="Игрок">
+            <!-- </div> -->
+            <!-- <div class="input_avatar"> -->
+              <p class="avatars">Выберите аватар:</p>
+              <div class="avatars">
+                <label>
+                  <img src="avatar/player1.png" alt="player1" height="100">
+                  <input type="radio" name="avatars" value="1" checked>
+                </label>
+                <label>
+                  <img src="avatar/player2.png" alt="player2" height="100">
+                  <input type="radio" name="avatars" value="2">
+                </label>
+                <label>
+                  <img src="avatar/player3.png" alt="player3" height="100">
+                  <input type="radio" name="avatars" value="3">
+                </label>
+                <label>
+                  <img src="avatar/player4.png" alt="player4" height="100">
+                  <input type="radio" name="avatars" value="4">
+                </label>
+              </div>
+            <!-- </div> -->
+            <button class="new_game">Новая игра</button>
+          </div>
+          <div class="main_content passive">
+            <img class="city" src="" alt="">
+            <img class="avatar" src="" alt="avatar">
+            <div class="results"><span></span></div>
+            <div class="messages"><span></span></div>
+            <div class="input_cities_group">
+              <div class="input_cities">
+                <input class="input_city" type="text" placeholder="Введите город">
+                <div class="buttons">
+                  <button class="microphone"><img src="img/microphone_on.png" alt="microphone_on"></button>
+                  <button class="send_city"><img src="img/send.png" alt="send"></button>
+                </div>
+              </div>
+              <button class="finish">Сдаться</button>
+            </div>
+          </div>
+          <div class="is_end passive">
+            <p>Вы уверены, <br> что хотите сдаться?</p>
+            <button class="yes">Да</button>
+            <button class="no">Нет</button>
+          </div>
+          <div class="end passive">
+            <div class="final_results"></div>
+            <img src="" alt="">
+            <button class="to_new_game">Новая игра</button>
+          </div>
+        <!-- </div> -->
+      </div>
+      <div class="footer">
+        <p>© 2021 Евгения Позднякова</p>
+        <select class="voices_list"></select>
+      </div>
     </div>
     <script src="main.js"></script>
   </body>
