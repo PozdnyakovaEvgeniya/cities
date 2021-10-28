@@ -209,9 +209,9 @@ div.avatars > label > img {
 .footer > * {
   align-self: center;
   font-family: "Montserrat", sans-serif;
-  font-size: calc(10px + 0.4vmin);
-  font-weight: 900;
-  color: #c5c5c5;
+  font-size: calc(9px + 0.4vmin);
+  font-weight: 100;
+  color: #2e2c2c;
 }
 .voices_list {
   border: 1px solid #b8b8b8;
@@ -220,8 +220,8 @@ div.avatars > label > img {
 }
 .voices_list > * {
   font-family: "Montserrat", sans-serif;
-  font-size: calc(10px + 0.4vmin);
-  font-weight: 900;
+  font-size: calc(9px + 0.4vmin);
+  font-weight: 100;
 }
 .passive {
   display: none;
