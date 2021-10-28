@@ -210,12 +210,13 @@ div.avatars > label > img {
   align-self: center;
   font-family: "Montserrat", sans-serif;
   font-size: calc(10px + 0.4vmin);
-  font-weight: 100;
+  font-weight: 200;
   color: #b8b8b8;
 }
 .voices_list {
   border: 1px solid #b8b8b8;
   width: 100%;
+  background: white;
 }
 .voices_list > * {
   font-family: "Montserrat", sans-serif;
