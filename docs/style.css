@@ -2,7 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: comic sans ms;
+  font-family: "Comic Sans MS";
   font-weight: bold;
   font-size: calc(13px + 0.8vmin);
 }
@@ -227,7 +227,10 @@ div.avatars > label > img {
 
 @import url("https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic");
 
-@import url("https://fonts.googleapis.com/css?family=Comic+Sans+MS:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic");
+@font-face {
+  font-family: "Comic Sans MS";
+  src: url("fonts/Comic Sans MS.ttf");
+}
 
 @media all and (max-width: 600px) {
   .container {
