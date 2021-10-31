@@ -247,7 +247,7 @@ function finalGame() {
   end.classList.remove('passive');
   end_img.src = ['avatar/computer.png', 'avatar/player' + player_avatar + '.png'][step % 2];
   end_img.alt = ['computer', 'player'][step % 2];
-  final_results.innerHTML = ['Сожалею, Вы проиграли. <br> Компьютер выиграл!', 'Поздравляю! <br> Вы победили!'][step % 2];
+  final_results.innerHTML = ['Сожалею, Вы проиграли. Компьютер выиграл!', 'Поздравляю! Вы победили!'][step % 2];
   speak(final_results.innerHTML);
 }
 
@@ -315,23 +315,23 @@ function findFirstLetter(elem) {
 
 function populateVoiceList() {
   voices = synth.getVoices();
-  let selectedIndex =
-  voices_list.selectedIndex < 0 ? 0 : voices_list.selectedIndex;
   voices_list.innerHTML = '';
 
   for(i = 0; i < voices.length ; i++) {
     let option = document.createElement('option');
     option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
 
-    if(voices[i].default) {
+    if(voices[i].lang == 'ru-RU') {
+      voices[i].default = true;
       option.textContent += ' -- DEFAULT';
+    } else {
+      voices[i].default = false;
     }
 
     option.setAttribute('data-lang', voices[i].lang);
     option.setAttribute('data-name', voices[i].name);
     voices_list.appendChild(option);
   }
-  voices_list.selectedIndex = selectedIndex;
 }
 
 function speak(message) {
