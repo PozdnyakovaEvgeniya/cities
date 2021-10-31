@@ -139,7 +139,7 @@ div.avatars > label > img {
 }
 .input_cities input::placeholder {
   font-family: "Montserrat", sans-serif;
-  font-weight: 100;
+  font-weight: 300;
 }
 .buttons {
   display: grid;
@@ -209,7 +209,7 @@ div.avatars > label > img {
   align-self: center;
   font-family: "Montserrat", sans-serif;
   font-size: calc(9px + 0.4vmin);
-  font-weight: 100;
+  font-weight: 300;
 }
 .voices_list {
   border: 1px solid #b8b8b8;
