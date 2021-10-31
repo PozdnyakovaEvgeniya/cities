@@ -14,7 +14,7 @@ button {
   cursor: pointer;
   background: #d3d300;
   border: none;
-  padding: 1vh 1vw;
+  padding: 1vh 2vw;
 }
 body {
   margin: 0;
@@ -192,12 +192,10 @@ div.avatars > label > img {
   justify-content: center;
   box-shadow: 15px 15px 10px #5c5c5c;
   text-align: center;
+  padding: 0 10%;
 }
 .final_results {
   font-size: calc(24px + 0.8vmin);
-}
-.end > button {
-  width: 70%;
 }
 .footer {
   grid-area: footer;
