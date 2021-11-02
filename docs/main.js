@@ -113,7 +113,7 @@ microphone.addEventListener('mousedown', function() {
   recognition.start();
 });
 
-microphone.addEventListener('pointerdown', function() {
+microphone.addEventListener('touchstart', function() {
   recognition.start();
 });
 
@@ -121,7 +121,7 @@ microphone.addEventListener('mouseup', function() {
   recognition.stop();
 });
 
-microphone.addEventListener('pointerup', function() {
+microphone.addEventListener('touchend', function() {
   recognition.stop();
 });
 
