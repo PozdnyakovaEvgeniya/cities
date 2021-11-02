@@ -315,22 +315,15 @@ function findFirstLetter(elem) {
 
 function populateVoiceList() {
   voices = synth.getVoices();
-  voices_list.innerHTML = '';
 
   for(i = 0; i < voices.length ; i++) {
-    let option = document.createElement('option');
-    option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
-
     if(voices[i].lang == 'ru-RU') {
-      voices[i].default = true;
-      option.textContent += ' -- DEFAULT';
-    } else {
-      voices[i].default = false;
+      let option = document.createElement('option');
+      option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
+      option.setAttribute('data-lang', voices[i].lang);
+      option.setAttribute('data-name', voices[i].name);
+      voices_list.appendChild(option);
     }
-
-    option.setAttribute('data-lang', voices[i].lang);
-    option.setAttribute('data-name', voices[i].name);
-    voices_list.appendChild(option);
   }
 }
 
@@ -344,7 +337,7 @@ function speak(message) {
       }
     }
     utterThis.pitch = 0.2;
-    utterThis.rate = 1.5;
+    utterThis.rate = 1;
     synth.speak(utterThis);
   }
 }
