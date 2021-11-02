@@ -86,24 +86,14 @@ recognition.lang = 'ru-RU';
 recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 
-recognition.onstart = function() {
-  microphone_icon.alt = 'microphone_off';  
-  microphone_icon.src = 'img/microphone_off.png';
-};
-
-recognition.onend = function() {
-  microphone_icon.src = 'img/microphone_on.png';
-  microphone_icon.alt = 'microphone_on';
-};
-
 sound.addEventListener('click', function() {
   this.classList.toggle('on');
   if (this.classList.contains('on')) {
-    sound_icon.src = 'img/sound_off.png';
-    sound_icon.alt = 'sound_off';
-  } else {
     sound_icon.src = 'img/sound_on.png';
     sound_icon.alt = 'sound_on';
+  } else {
+    sound_icon.src = 'img/sound_off.png';
+    sound_icon.alt = 'sound_off';
   }
 });
 
@@ -119,8 +109,12 @@ new_game.addEventListener('click', function() {
   startGame();
 });
 
-microphone.addEventListener('click', function() {
+microphone.addEventListener('mousedown', function() {
   recognition.start();
+});
+
+microphone.addEventListener('mouseup', function() {
+  recognition.stop();
 });
 
 recognition.onresult = function(event) {
@@ -315,22 +309,15 @@ function findFirstLetter(elem) {
 
 function populateVoiceList() {
   voices = synth.getVoices();
-  voices_list.innerHTML = '';
 
   for(i = 0; i < voices.length ; i++) {
-    let option = document.createElement('option');
-    option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
-
-    if(voices[i].lang == 'de-DE') {
-      voices[i].selectedIndex = i;
-      option.textContent += ' -- DEFAULT';
-    } else {
-      voices[i].default = false;
+    if(voices[i].lang == 'ru-RU' || voices[i].lang == 'ru_RU') {
+      let option = document.createElement('option');
+      option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
+      option.setAttribute('data-lang', voices[i].lang);
+      option.setAttribute('data-name', voices[i].name);
+      voices_list.appendChild(option);
     }
-
-    option.setAttribute('data-lang', voices[i].lang);
-    option.setAttribute('data-name', voices[i].name);
-    voices_list.appendChild(option);
   }
 }
 
@@ -344,7 +331,7 @@ function speak(message) {
       }
     }
     utterThis.pitch = 0.2;
-    utterThis.rate = 1.5;
+    utterThis.rate = 1;
     synth.speak(utterThis);
   }
 }
