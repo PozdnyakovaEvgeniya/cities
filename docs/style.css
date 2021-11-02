@@ -44,6 +44,7 @@ body {
 .sound {
   background: none;
   border: none;
+  padding: 0;
 }
 .container {
   grid-area: article;
@@ -153,6 +154,18 @@ div.avatars > label > img {
   border: none;
   background: #feffed;
   padding: 0;
+}
+@keyframes anim {
+  from {
+    background: white;
+  }
+  to {
+    background: #d3d300;
+  }
+}
+.microphone:active {
+  border-radius: 50%;
+  animation: anim 1.5s ease-in infinite;
 }
 .is_end {
   min-width: 600px;
