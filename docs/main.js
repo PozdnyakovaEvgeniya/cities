@@ -86,6 +86,14 @@ recognition.lang = 'ru-RU';
 recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 
+recognition.onstart = function() {
+  microphone.classList.add('active');
+}
+
+recognition.onend = function() {
+  microphone.classList.remove('active');
+}
+
 sound.addEventListener('click', function() {
   this.classList.toggle('on');
   if (this.classList.contains('on')) {

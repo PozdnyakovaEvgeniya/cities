@@ -163,9 +163,12 @@ div.avatars > label > img {
     background: #d3d300;
   }
 }
-.microphone:active {
+.microphone.active {
   border-radius: 50%;
   animation: anim 1.5s ease-in infinite;
+}
+.microphone img {
+  pointer-events: none;
 }
 .is_end {
   min-width: 600px;
