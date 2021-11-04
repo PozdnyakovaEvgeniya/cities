@@ -70,28 +70,59 @@ let SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarLi
 let SpeechRecognitionEvent = window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
 
 let citiesList = [];
-for (let key in allCities) {
-  for (let city of allCities[key]) {
-    citiesList.push(city);
+let grammar, recognition, speechRecognitionList;
+
+if (SpeechRecognition != undefined) {
+  for (let key in allCities) {
+    for (let city of allCities[key]) {
+      citiesList.push(city);
+    }
   }
-}
-let grammar = '#JSGF V1.0; grammar cities; public <city> = ' + citiesList.join(' | ') + ' ;';
+  grammar = '#JSGF V1.0; grammar cities; public <city> = ' + citiesList.join(' | ') + ' ;';
 
-let recognition = new SpeechRecognition();
-let speechRecognitionList = new SpeechGrammarList();
-speechRecognitionList.addFromString(grammar, 1);
+  recognition = new SpeechRecognition();
+  speechRecognitionList = new SpeechGrammarList();
+  speechRecognitionList.addFromString(grammar, 1);
 
-recognition.grammars = speechRecognitionList;
-recognition.lang = 'ru-RU';
-recognition.interimResults = false;
-recognition.maxAlternatives = 1;
+  recognition.grammars = speechRecognitionList;
+  recognition.lang = 'ru-RU';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
 
-recognition.onstart = function() {
-  microphone.classList.add('active');
-}
+  recognition.onstart = function() {
+    microphone.classList.add('active');
+  }
 
-recognition.onend = function() {
-  microphone.classList.remove('active');
+  recognition.onend = function() {
+    microphone.classList.remove('active');
+  }
+
+  microphone.addEventListener('mousedown', function() {
+    recognition.start();
+  });
+
+  microphone.addEventListener('touchstart', function() {
+    recognition.start();
+  });
+
+  microphone.addEventListener('mouseup', function() {
+    recognition.stop();
+  });
+
+  microphone.addEventListener('touchend', function() {
+    recognition.stop();
+  });
+
+  recognition.onresult = function(event) {
+    let last = event.results.length - 1;
+    let message = getObjects(event.results[last][0].transcript);
+    if (message != null) {
+      input_city.value = message;
+      playerStep();
+    }
+  };
+} else {
+  microphone.classList.add('passive');
 }
 
 sound.addEventListener('click', function() {
@@ -116,31 +147,6 @@ new_game.addEventListener('click', function() {
   }
   startGame();
 });
-
-microphone.addEventListener('mousedown', function() {
-  recognition.start();
-});
-
-microphone.addEventListener('touchstart', function() {
-  recognition.start();
-});
-
-microphone.addEventListener('mouseup', function() {
-  recognition.stop();
-});
-
-microphone.addEventListener('touchend', function() {
-  recognition.stop();
-});
-
-recognition.onresult = function(event) {
-  let last = event.results.length - 1;
-  let message = getObjects(event.results[last][0].transcript);
-  if (message != null) {
-    input_city.value = message;
-    playerStep();
-  }
-};
 
 send_city.addEventListener('click', function() {
   if (isInObj(standardizeCity(input_city.value), allCities)) {
