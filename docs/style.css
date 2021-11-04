@@ -304,11 +304,11 @@ div.avatars > label > img {
     grid-template-columns: 75% 24%;
   }
   .input_cities {
-    grid-template-columns: 5fr 2fr;
+    grid-template-columns: 5fr auto;
   }
   .buttons {
-    grid-template-columns: 40% 48%;
-    justify-content: space-between;
+    grid-template-columns: 1fr auto;
+    grid-gap: 2vw;
   }
   .is_end {
     border: none;
