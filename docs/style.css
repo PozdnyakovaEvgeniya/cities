@@ -94,7 +94,7 @@ div.avatars > label > img {
   justify-self: center;
 }
 .main_content {
-  min-width: 600px;
+  min-width: calc(600px - 4vw);
   min-height: 400px;
   width: 45vw;
   height: 55vh;
@@ -141,6 +141,7 @@ div.avatars > label > img {
 .input_cities input::placeholder {
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
+  color: #7a7a7a;
 }
 .buttons {
   display: grid;
@@ -157,7 +158,7 @@ div.avatars > label > img {
 }
 @keyframes anim {
   from {
-    background: white;
+    background: #feffed;
   }
   to {
     background: #d3d300;
@@ -224,6 +225,7 @@ div.avatars > label > img {
   font-family: "Montserrat", sans-serif;
   font-size: calc(9px + 0.4vmin);
   font-weight: 300;
+  color: #7a7a7a;
 }
 .voices_list {
   border: 1px solid #b8b8b8;
