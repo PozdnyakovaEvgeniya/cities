@@ -329,3 +329,9 @@ div.avatars > label > img {
     box-shadow: none;
   }
 }
+
+@media all and (max-width: 450px) {
+  .input_cities_group {
+    grid-template-columns: 65% 34%;
+  }
+}
