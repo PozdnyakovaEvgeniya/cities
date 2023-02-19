@@ -80,9 +80,9 @@ if (SpeechRecognition != undefined) {
       citiesList.push(city);
     }
   }
-  grammar = '#JSGF V1.0; grammar cities; public <city> = ' + citiesList.join(' | ') + ' ;';
+  // grammar = '#JSGF V1.0; grammar cities; public <city> = ' + citiesList.join(' | ') + ' ;';
 
-  recognition = new SpeechRecognition();
+  const newLocal = recognition = new SpeechRecognition();
   speechRecognitionList = new SpeechGrammarList();
   speechRecognitionList.addFromString(grammar, 1);
 
